@@ -40,8 +40,8 @@ PostContainer.propTypes = {
 
 function mapStateToProps(state, props) {
   return {
-    posts: state.posts[props.name].items,
-    isFetching: state.posts[props.name].isFetching,
+    posts: state[props.name].items,
+    isFetching: state[props.name].isFetching,
   }
 }
 

@@ -3,13 +3,14 @@ import thunkMiddleware from 'redux-thunk';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { posts } from './posts/reducers';
+import { postWithName } from './posts/reducers';
 import App from './App';
 
 
 function storeWrapper(state = {}, action) {
   return {
-    posts: posts(state.posts, action)
+    a_posts: postWithName('a_posts')(state.a_posts, action),
+    b_posts: postWithName('b_posts')(state.a_posts, action)
   }
 }
 
