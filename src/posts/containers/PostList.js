@@ -11,11 +11,17 @@ class PostContainer extends Component {
   }
 
   render() {
-    const { posts } = this.props
+    const { posts, isFetching } = this.props
     return (
+      
       <div>
+      {isFetching &&
+          <div>
+            Loading...
+          </div>
+        }
         {posts.length > 0 &&
-          <div style={{ opacity:  1 }}>
+          <div style={{ opacity: isFetching ? 0.5 : 1 }}>
             <Posts posts={posts} />
           </div>
         }
@@ -27,13 +33,15 @@ class PostContainer extends Component {
 PostContainer.propTypes = {
   posts: PropTypes.array.isRequired,
   cat: PropTypes.string.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state, props) {
   return {
-    posts: state.posts[props.name].items
+    posts: state.posts[props.name].items,
+    isFetching: state.posts[props.name].isFetching,
   }
 }
 
