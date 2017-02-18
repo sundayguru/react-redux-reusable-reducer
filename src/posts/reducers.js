@@ -1,5 +1,4 @@
 
-import { combineReducers } from 'redux'
 import {
   REQUEST_POSTS, RECEIVE_POSTS
 } from './actions'
