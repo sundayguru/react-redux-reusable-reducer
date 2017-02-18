@@ -1,21 +1,24 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore, combineReducers } from 'redux'
-import { todos, visibilityFilter } from './todo/reducers'
-import App from './todo/components/App'
+import React from 'react';
+import thunkMiddleware from 'redux-thunk';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { posts } from './posts/reducers';
+import App from './App';
 
-function todoAppWrapper(state = {}, action) {
+
+function storeWrapper(state = {}, action) {
   return {
-    visibilityFilter: visibilityFilter(state.visibilityFilter, action),
-    todos_great: todos(state.todos_great, action, "todos_great"),
-    todos_main: todos(state.todos_main, action, "todos_main")
+    posts: posts(state.posts, action)
   }
 }
 
-//const todoApp = combineReducers({todoAppWrapper})
-
-let store = createStore(todoAppWrapper)
+let store = createStore(
+  storeWrapper,
+  applyMiddleware(
+      thunkMiddleware
+    )
+  )
 
 render(
   <Provider store={store}>
