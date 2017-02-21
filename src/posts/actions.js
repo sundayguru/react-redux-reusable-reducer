@@ -10,11 +10,10 @@ let sampleResponse = [
   {"title":"test title 4","id":2015796113853353331,"category":"b"}
 ]
 
-export function requestPosts(payload, name) {
+export function requestPosts(name) {
   return {
     type: REQUEST_POSTS,
-    name,
-    payload
+    name
   }
 }
 
@@ -29,7 +28,7 @@ export function receivePosts(payload, name) {
 export function fetchPosts(query, name) {
   
   return dispatch => {
-    dispatch(requestPosts(query, name))
+    dispatch(requestPosts(name))
     return new Promise(function(resolve, reject) {
       setTimeout(function() {
         let result = sampleResponse.filter(function(item){
